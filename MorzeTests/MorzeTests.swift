@@ -127,7 +127,7 @@ class MorzeTests: XCTestCase {
 		XCTAssertEqual(0, occupations.count)
 	}
 	
-	func testSwift_ControlFlow
+	func testSwift_ControlFlow()
 	{
 		
 	}

@@ -312,7 +312,40 @@ class MorzeTests: XCTestCase {
 		let has10 = hasAnyMatches(list: [1, 2, 3, 4, 5, 6, 10, 20, 30], condition: greateThan10) // use func as parameter
 		XCTAssertTrue(has10)
 	}
-	
+
+	func testSwift_Closures()
+	{
+		// Use closure as param
+		let numbers = [20, 19, 7, 12]
+		
+		let mapped10 = numbers.map(
+				{							// use '{' and '}' for closure
+					(number: Int) -> Int in	// Use 'in' te separate body
+						let result = 10 * number
+						return result
+				}
+		)
+		XCTAssertEqual([200, 190, 70, 120], mapped10)
+		
+		let mappedOdd = numbers.map({ (number: Int) -> Int in
+			if number % 2 == 0 {
+				return 0
+			}
+			return number
+		})
+		XCTAssertEqual([0, 19, 7, 0], mappedOdd)
+		
+		// skip param and ret type - if closure is know
+		let mappedNumbers = numbers.map( { number in 10 * number } )
+		XCTAssertEqual([200, 190, 70, 120], mappedNumbers)
+		
+		let mappedTo10 = numbers.map { number in 10 * number }  // skip parentheses
+		XCTAssertEqual([200, 190, 70, 120], mappedTo10)
+		
+		// skip param, return type and parentheses - use args numbers:
+		let sortedNumbers = numbers.sorted { $0 > $1 }
+		XCTAssertEqual([20, 19, 12, 7], sortedNumbers)
+	}
 }
 
 

@@ -240,6 +240,79 @@ class MorzeTests: XCTestCase {
 		XCTAssertEqual(15, sum)
 	}
 	
+	func testSwift_Functions()
+	{
+		// function
+		func sayHello(person: String, day: String) -> String {
+			return "Hello \(person), today is \(day)";
+		}
+		let helloVitya = sayHello(person: "Vitya", day: "Monday")	// use param names as labels (default) to call func
+		XCTAssertEqual("Hello Vitya, today is Monday", helloVitya)
+
+		// function with labels and _ (_ used to skip label in func call)
+		func greet(_ person: String, on day: String) -> String {
+			return "Hello \(person), today is \(day)";
+		}
+		let greetVitya = greet("Vitya", on: "Monday")				// skip label for 'person' param and use 'on' label for 'day' param
+		XCTAssertEqual("Hello Vitya, today is Monday", greetVitya)
+		
+		// tuple <- returned by function
+		func getStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
+			var min = scores[0]
+			var max = scores[0]
+			var sum = 0
+			for score in scores {
+				sum += score
+				if score > max {
+					max = score
+				} else if score < min {
+					min = score
+				}
+			}
+			return (min, max, sum)
+		}
+		let statistics = getStatistics(scores: [5, 3, 100, 3, 9])	// func return tuple
+		XCTAssertEqual(3, statistics.min)
+		XCTAssertEqual(100, statistics.1)		// .max
+		XCTAssertEqual(120, statistics.sum)
+		
+		// nested function
+		func return15() -> Int {
+			var num = 10
+			func add5() {
+				num += 5		// use var from outer func
+			}
+			add5()
+			return num
+		}
+		XCTAssertEqual(15, return15())
+		
+		// function return function
+		func makeIncrementer() -> ((Int) -> Int) {
+			func addOne(number: Int) -> Int {
+				return number + 1
+			}
+			return addOne			// return function
+		}
+		let incrimentFn = makeIncrementer()
+		XCTAssertEqual(7+1, incrimentFn(7))
+		
+		// function as argument for other function
+		func hasAnyMatches(list: [Int], condition: ((Int) -> Bool)) -> Bool {
+			for item in list {
+				if condition(item) {
+					return true
+				}
+			}
+			return false
+		}
+		func greateThan10(number: Int) -> Bool {
+			return number > 10
+		}
+		let has10 = hasAnyMatches(list: [1, 2, 3, 4, 5, 6, 10, 20, 30], condition: greateThan10) // use func as parameter
+		XCTAssertTrue(has10)
+	}
+	
 }
 
 

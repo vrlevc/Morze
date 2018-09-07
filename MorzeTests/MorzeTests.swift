@@ -129,10 +129,140 @@ class MorzeTests: XCTestCase {
 	
 	func testSwift_ControlFlow()
 	{
-		  
+		// for_in and if_else
+		let individualScores = [60, 40, 100, 80, 12]
+		var teamScore = 0
+		for score in individualScores {
+			if score > 50 {
+				teamScore += 3
+			} else {
+				teamScore += 1
+			}
+		}
+		
+		XCTAssertEqual(11, teamScore)
+		
+		// Optional value - same as nullable
+		var optionString: String? = "Hello"
+		XCTAssertNotNil(optionString)
+		
+		optionString = nil
+		XCTAssertNil(optionString)
+		
+		var optionalName: String? = "John Smith"
+		var greeting = "Hello!"
+		
+		if let name = optionalName {
+			greeting = "Hello, \(name)"
+		}
+		XCTAssertEqual("Hello, John Smith", greeting)
+		
+		optionalName = nil
+		if let name = optionalName {		// optionalName is nil -> go to else case!!!
+			greeting = "Hello, \(name)"
+		} else {
+			greeting = "Hello, baby"
+		}
+		XCTAssertEqual("Hello, baby", greeting)
+		
+		// ?? - used for default value
+		let nickName: String? = nil
+		let fullName: String  = "Viktor Levchenko"
+		let informalGreating = "Hi \(nickName ?? fullName)"     // use fullName if nickName is nil
+		XCTAssertEqual("Hi Viktor Levchenko", informalGreating)
+		
+		// switch - break can be omitted
+		let vegetable = "red pepper"
+		var vegetableInfo: String?
+		switch vegetable {
+		case "celery":
+			vegetableInfo = "Add some raisins and make ants on a log."
+		case "cucumber", "watercress":
+			vegetableInfo = "That would make a good tea sandwich."
+		case let x where x.hasSuffix("pepper"):
+			vegetableInfo  = "Is it a spicy \(x)?"
+		default:										// MUST BE!!!
+			vegetableInfo = "Everything tastes good in soup."
+		}
+		XCTAssertEqual("Is it a spicy red pepper?", vegetableInfo)
+		
+		// for - iteration by arrary and dictionary
+		let interestingNumbers = [
+			"Prime"	   : [2, 3, 5, 7, 11, 13],
+			"Fibonacci": [1, 1, 2, 3, 5, 8],
+			"Square"   : [1, 4, 9, 16, 25],
+		]
+		var largest = 0
+		var numKind: String? = nil
+		for (kind, numbers) in interestingNumbers {
+			for number in numbers {
+				if number > largest {
+					largest = number
+					numKind = kind
+				}
+			}
+		}
+		XCTAssertEqual("Square", numKind)
+		XCTAssertEqual(25, largest)
+		
+		// while
+		var n = 2
+		while n < 101 {
+			n += 5
+		}
+		XCTAssertEqual(102, n)
+		
+		// repeat_while
+		var m = 2
+		repeat {
+			m += 5
+		} while m < 101
+		XCTAssertEqual(102, m)
+		
+		// range ..<	[a, b)
+		var loopNum = 0
+		var sum = 0
+		for i in 0..<5 {
+			loopNum += 1
+			sum += i
+		}
+		XCTAssertEqual(5, loopNum)
+		XCTAssertEqual(10, sum)
+		
+		// range ...	[a, b]
+		loopNum = 0
+		sum = 0
+		for i in 0...5 {
+			loopNum += 1
+			sum += i
+		}
+		XCTAssertEqual(6, loopNum)
+		XCTAssertEqual(15, sum)
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

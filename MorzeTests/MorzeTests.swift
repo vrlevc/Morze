@@ -346,6 +346,147 @@ class MorzeTests: XCTestCase {
 		let sortedNumbers = numbers.sorted { $0 > $1 }
 		XCTAssertEqual([20, 19, 12, 7], sortedNumbers)
 	}
+	
+	func testSwift_ObjectsClasses()
+	{
+		// class - basic
+		class Shape {								// 'class'
+			var numberOfSides = 0					// member declaration
+			func description() -> String {			// function declaration
+				return "A shape with \(numberOfSides) sides."
+			}
+		}
+		let shape = Shape() 		// put parentheses after the class name
+		shape.numberOfSides = 10	// dot notaion
+		let shapeDescription = shape.description()
+		XCTAssertEqual(10, shape.numberOfSides)
+		XCTAssertEqual("A shape with 10 sides.", shapeDescription)
+		
+		// class initializer
+		class NamedShape {
+			// must be init here or in init function
+			var numberOfSides: Int = 0
+			var name: String
+			
+			init(name: String) {
+				self.name = name	// init in initializer
+			}
+			
+			deinit {
+				// clean up if needed
+			}
+			
+			func description() -> String {
+				return "A shape with \(numberOfSides) sides."
+			}
+		}
+		let namedShape = NamedShape(name: "Loop")
+		XCTAssertEqual("Loop", namedShape.name)
+		
+		// subclassing
+		class Square: NamedShape {			// inherited from NamedShape
+			let squareNumberOfSides = 4
+			var sideLength: Double
+			
+			init(sideLength: Double, name: String) {
+				self.sideLength = sideLength
+				super.init(name: name)
+				numberOfSides = squareNumberOfSides
+			}
+			
+			func area() -> Double {			// new function
+				return sideLength * sideLength
+			}
+			
+			override func description() -> String {	// overrided function
+				return "A square with sides of length \(sideLength)."
+			}
+		}
+		let square = Square(sideLength: 2.5, name: "Free")
+		XCTAssertEqual("Free", square.name)
+		XCTAssertEqual(4, square.numberOfSides)
+		XCTAssertEqual("A square with sides of length 2.5.", square.description())
+		XCTAssertEqual(2.5, square.sideLength)
+		XCTAssertEqual(6.25, square.area())
+		
+		// properties - get/set
+		class EquilateralTriangle: NamedShape {
+			var sideLength: Double = 0.0
+			
+			init(sideLength: Double, name: String) {
+				self.sideLength = sideLength
+				super.init(name: name)
+				numberOfSides = 3
+			}
+			
+			var perimeter: Double {
+				get {
+					return 3.0 * sideLength
+				}
+				set {								// defult name : newValue
+					sideLength = newValue / 3.0
+				}
+			}
+			
+			var extendedLength: Double {
+				get {
+					return perimeter
+				}
+				set (newLength) {
+					sideLength = newLength / 3.0
+				}
+			}
+			
+			override func description() -> String {
+				return "An equilateral triangle with sides of length \(sideLength)."
+			}
+		}
+		let equilateralTriangle = EquilateralTriangle(sideLength: 2.5, name: "Free")
+		XCTAssertEqual("Free", equilateralTriangle.name)
+		XCTAssertEqual(3, equilateralTriangle.numberOfSides)
+		XCTAssertEqual("An equilateral triangle with sides of length 2.5.", equilateralTriangle.description())
+		XCTAssertEqual(7.5, equilateralTriangle.perimeter)
+		equilateralTriangle.perimeter = 9
+		XCTAssertEqual(3, equilateralTriangle.sideLength)
+		XCTAssertEqual(9, equilateralTriangle.extendedLength)
+		equilateralTriangle.extendedLength = 7.5
+		XCTAssertEqual(2.5, equilateralTriangle.sideLength)
+		
+		// property willSet/didSet
+		class TriangleAndSquare {
+			var triangle: EquilateralTriangle {
+				willSet (newTriangle) {
+					square.sideLength = newTriangle.sideLength
+				}
+			}
+			var square: Square {
+				willSet {
+					triangle.sideLength = newValue.sideLength
+				}
+			}
+			init(size: Double, name: String) {
+				square = Square(sideLength: size, name: name)
+				triangle = EquilateralTriangle(sideLength: size, name: name)
+			}
+		}
+		let triangleAndSquare = TriangleAndSquare(size: 10, name: "complex-shape")
+		XCTAssertEqual(triangleAndSquare.square.sideLength, triangleAndSquare.triangle.sideLength)
+		triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
+		XCTAssertEqual(triangleAndSquare.square.sideLength, triangleAndSquare.triangle.sideLength)
+		triangleAndSquare.triangle = EquilateralTriangle(sideLength: 20, name: "smaller triangle")
+		XCTAssertEqual(triangleAndSquare.square.sideLength, triangleAndSquare.triangle.sideLength)
+		
+		// call methods or access members of nullable var
+		var optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")	// can be nil
+		var sideLength = optionalSquare?.sideLength				// can be nil as far as optionalSquare can
+		XCTAssertNotNil(optionalSquare)
+		XCTAssertNotNil(sideLength)
+		
+		optionalSquare = nil
+		sideLength = optionalSquare?.sideLength
+		XCTAssertNil(optionalSquare)
+		XCTAssertNil(sideLength)
+	}
 }
 
 

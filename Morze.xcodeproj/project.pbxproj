@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		548369F52146B1AC00A62024 /* Morzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548369F42146B1AC00A62024 /* Morzer.swift */; };
+		548369F62146B1AC00A62024 /* Morzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548369F42146B1AC00A62024 /* Morzer.swift */; };
+		548369F72146B1AC00A62024 /* Morzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548369F42146B1AC00A62024 /* Morzer.swift */; };
 		54C5DE7321410B79002ED1BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5DE7221410B79002ED1BD /* AppDelegate.swift */; };
 		54C5DE7521410B7A002ED1BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C5DE7421410B7A002ED1BD /* ViewController.swift */; };
 		54C5DE7821410B7A002ED1BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54C5DE7621410B7A002ED1BD /* Main.storyboard */; };
@@ -34,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		548369F42146B1AC00A62024 /* Morzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morzer.swift; sourceTree = "<group>"; };
 		54C5DE6F21410B79002ED1BD /* Morze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C5DE7221410B79002ED1BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54C5DE7421410B7A002ED1BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 			children = (
 				54C5DE7221410B79002ED1BD /* AppDelegate.swift */,
 				54C5DE7421410B7A002ED1BD /* ViewController.swift */,
+				548369F42146B1AC00A62024 /* Morzer.swift */,
 				54C5DE7621410B7A002ED1BD /* Main.storyboard */,
 				54C5DE7921410B7B002ED1BD /* Assets.xcassets */,
 				54C5DE7B21410B7B002ED1BD /* LaunchScreen.storyboard */,
@@ -258,6 +263,7 @@
 			files = (
 				54C5DE7521410B7A002ED1BD /* ViewController.swift in Sources */,
 				54C5DE7321410B79002ED1BD /* AppDelegate.swift in Sources */,
+				548369F52146B1AC00A62024 /* Morzer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				548369F62146B1AC00A62024 /* Morzer.swift in Sources */,
 				54C5DE8821410B7B002ED1BD /* MorzeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				548369F72146B1AC00A62024 /* Morzer.swift in Sources */,
 				54C5DE9321410B7B002ED1BD /* MorzeUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

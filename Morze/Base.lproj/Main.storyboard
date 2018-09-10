@@ -21,6 +21,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2et-w8-0ii" userLabel="Input">
                                 <rect key="frame" x="16" y="20" width="140" height="270"/>
                                 <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" identifier="InputView"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="270" id="LAB-mn-AI6"/>
                                 </constraints>
@@ -33,6 +34,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lcX-ve-ige" userLabel="Coded">
                                 <rect key="frame" x="164" y="20" width="140" height="270"/>
                                 <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" identifier="OutputView"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

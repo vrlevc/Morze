@@ -8,9 +8,28 @@
 
 import Foundation
 
-func code(symbol: String) ->String {
-	var coded: String
+enum Lang {
+	case Eng, Ukr, Rus
+}
+
+class Morzer {
+	static var lang: Lang = .Eng
+	static let deviderLetter: String = " "
+	static let deviderWord  : String = "  "
+}
+
+
+func code(symbol: Character) -> String?
+{
+	var coded: String? = nil
+	
 	switch symbol {
+	case "И", "и":
+		if Morzer.lang == .Rus {
+			coded = "··" 	// Rus
+		} else if Morzer.lang == .Ukr {
+			coded = "−·−−"	// Ukr
+		}
 	case "A", "a", "А", "а":
 		coded = "·−"
 	case "B", "b", "Б", "б":
@@ -27,7 +46,7 @@ func code(symbol: String) ->String {
 		coded = "···−"
 	case  "Z", "z", "З", "з":
 		coded = "−−··"
-	case  "I", "i", "И", "и", "І", "і":
+	case  "I", "i", "І", "і":
 		coded = "··"
 	case "J", "j", "Й", "й":
 		coded = "·−−−"
@@ -59,7 +78,7 @@ func code(symbol: String) ->String {
 		coded = "−·−·"
 	case "Q", "q", "Щ", "щ":
 		coded = "−−·−"
-	case "Y", "y", "Ы", "ы", "И", "и":
+	case "Y", "y", "Ы", "ы":
 		coded = "−·−−"
 	case "X", "x", "Ь", "ь":
 		coded = "−··−"
@@ -121,13 +140,41 @@ func code(symbol: String) ->String {
 	case "!":
 		coded = "−−··−−"
 	default:										// MUST BE!!!
-		coded = ""
+		coded = nil
 	}
 	return coded
 }
 
 func code(text string: String) -> String {
-	return code(symbol: string)
+	var morzeCode = String()
+	var prevChar: Character? = nil
+	for char in string {
+		var preffix = ""
+		if prevChar != nil {
+			preffix += Morzer.deviderLetter
+		}
+		let charCode = code(symbol: char) ?? "?"
+		morzeCode += preffix + charCode
+		prevChar = char
+	}
+	return morzeCode
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

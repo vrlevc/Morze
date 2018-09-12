@@ -11,29 +11,60 @@ import XCTest
 
 class MorzeTests: XCTestCase {
 	
-/*
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+	func testMorze_UkrWordCodding()
+	{
+		let dev = Morzer.deviderLetter
+		
+		let wordCapL   = "ГІЛКА"
+		let wordSmallL = "гілка"
+		let wordMixedL = "ГіЛка"
+		let coded = "−−·" + dev + "··" + dev + "·−··" + dev + "−·−" + dev + "·−"
+		
+		XCTAssertEqual(coded, code(text: wordCapL))
+		XCTAssertEqual(coded, code(text: wordSmallL))
+		XCTAssertEqual(coded, code(text: wordMixedL))
+	}
 	
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-*/
+	func testMorze_RusWordCodding()
+	{
+		let dev = Morzer.deviderLetter
+		
+		let wordCapL   = "ПРОСТО"
+		let wordSmallL = "просто"
+		let wordMixedL = "ПроСтО"
+		let coded = "·−−·" + dev + "·−·" + dev + "−−−" + dev + "···" + dev + "−" + dev + "−−−"
+		
+		XCTAssertEqual(coded, code(text: wordCapL))
+		XCTAssertEqual(coded, code(text: wordSmallL))
+		XCTAssertEqual(coded, code(text: wordMixedL))
+	}
+	
+	func testMorze_EngWordCodding()
+	{
+		let dev = Morzer.deviderLetter
+		
+		let wordCapL   = "SIMPLE"
+		let wordSmallL = "simple"
+		let wordMixedL = "SiMplE"
+		let coded = "···" + dev + "··" + dev + "−−" + dev + "·−−·" + dev + "·−··" + dev + "·"
+		
+		XCTAssertEqual(coded, code(text: wordCapL))
+		XCTAssertEqual(coded, code(text: wordSmallL))
+		XCTAssertEqual(coded, code(text: wordMixedL))
+	}
+	
+	func testMorze_UkRs_I_Letter()
+	{
+		// Rus
+		Morzer.lang = Lang.Rus
+		XCTAssertEqual(code(text: "И"), "··");
+		XCTAssertEqual(code(text: "и"), "··");
+		
+		// Uk
+		Morzer.lang = Lang.Ukr
+		XCTAssertEqual(code(text: "и"), "−·−−")
+		XCTAssertEqual(code(text: "И"), "−·−−")
+	}
 	
 	func testMorzer_LettersCppitalLatin()
 	{
@@ -106,7 +137,7 @@ class MorzeTests: XCTestCase {
 		XCTAssertEqual(code(text: "Ё"), "·")
 		XCTAssertEqual(code(text: "Ж"), "···−")
 		XCTAssertEqual(code(text: "З"), "−−··")
-		XCTAssertEqual(code(text: "И"), "··");
+//		XCTAssertEqual(code(text: "И"), "··");
 		XCTAssertEqual(code(text: "І"), "··")
 		XCTAssertEqual(code(text: "Й"), "·−−−")
 		XCTAssertEqual(code(text: "К"), "−·−")
@@ -147,7 +178,7 @@ class MorzeTests: XCTestCase {
 		XCTAssertEqual(code(text: "ё"), "·")
 		XCTAssertEqual(code(text: "ж"), "···−")
 		XCTAssertEqual(code(text: "з"), "−−··")
-		XCTAssertEqual(code(text: "и"), "··");
+//		XCTAssertEqual(code(text: "и"), "··");
 		XCTAssertEqual(code(text: "і"), "··")
 		XCTAssertEqual(code(text: "й"), "·−−−")
 		XCTAssertEqual(code(text: "к"), "−·−")
@@ -204,17 +235,6 @@ class MorzeTests: XCTestCase {
 		XCTAssertEqual(code(text: "/"), "−··−·")
 		XCTAssertEqual(code(text: "?"), "··−−··")
 		XCTAssertEqual(code(text: "!"), "−−··−−")
-	}
-	
-	func testMorze_UkRs_I_Letter()
-	{
-		// Rus
-		XCTAssertEqual(code(text: "И"), "··");
-		XCTAssertEqual(code(text: "и"), "··");
-		
-		// Uk
-		XCTAssertEqual(code(text: "и"), "−·−−")
-		XCTAssertEqual(code(text: "И"), "−·−−")
 	}
 	
 }

@@ -83,6 +83,49 @@ class MorzeUITests: XCTestCase {
 		XCTAssertEqual(code(text: text), outText)
 
 	}
+	
+	func testChangeInputLang()
+	{
+		var inputModes:[UITextInputMode] = UITextInputMode.activeInputModes
+		print("The naumber of activeInputModes is \(inputModes.count)")
+		for mode in inputModes {
+			print("Priamry language for mode \(mode.primaryLanguage ?? "NIL")")
+		}
+
+		input?.tap()
+		
+		let mode = UITextInputMode()
+		print("New created input mode language : \(mode.primaryLanguage ?? "NIL")")
+		
+		let nextKeyboardButton = app?/*@START_MENU_TOKEN@*/.buttons["Next keyboard"]/*[[".keyboards.buttons[\"Next keyboard\"]",".buttons[\"Next keyboard\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+		nextKeyboardButton?.tap()
+		
+		inputModes = UITextInputMode.activeInputModes
+		print("The naumber of activeInputModes is \(inputModes.count)")
+		for mode in inputModes {
+			print("Priamry language for mode \(mode.primaryLanguage ?? "NIL")")
+		}
+
+		
+		nextKeyboardButton?.tap()
+		
+		inputModes = UITextInputMode.activeInputModes
+		print("The naumber of activeInputModes is \(inputModes.count)")
+		for mode in inputModes {
+			print("Priamry language for mode \(mode.primaryLanguage ?? "NIL")")
+		}
+
+		nextKeyboardButton?.tap()
+		
+		inputModes = UITextInputMode.activeInputModes
+		print("The naumber of activeInputModes is \(inputModes.count)")
+		for mode in inputModes {
+			print("Priamry language for mode \(mode.primaryLanguage ?? "NIL")")
+		}
+
+		
+		
+	}
 }
 
 

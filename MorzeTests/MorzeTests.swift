@@ -11,6 +11,21 @@ import XCTest
 
 class MorzeTests: XCTestCase {
 	
+	func testMorze_WordCoddingLangDepending()
+	{
+		let dev = Morzer.deviderLetter
+		
+		let word = "Пиво"
+		let codedRus = "·−−·" + dev + "··" + dev + "·−−" + dev + "−−−"
+		let codedUkr = "·−−·" + dev + "−·−−" + dev + "·−−" + dev + "−−−"
+		
+		Morzer.lang = Lang.Rus
+		XCTAssertEqual(codedRus, code(text: word))
+		
+		Morzer.lang = Lang.Ukr
+		XCTAssertEqual(codedUkr, code(text: word))
+	}
+	
 	func testMorze_UkrWordCodding()
 	{
 		let dev = Morzer.deviderLetter

@@ -11,6 +11,22 @@ import XCTest
 
 class MorzeTests: XCTestCase {
 	
+	func testMorze_SentenceCodding()
+	{
+		let devW = Morzer.deviderWord
+		
+		// Simple
+		let sentenceSimple  = "Simple two words!!!"
+		let sentenceComplex = "    Simple    two    words!!!"
+		let w0 = code(text: "Simple")
+		let w1 = code(text: "two")
+		let w2 = code(text: "words!!!")
+		let codedExp = w0+devW+w1+devW+w2
+		
+		XCTAssertEqual(codedExp, code(text: sentenceSimple))
+		XCTAssertEqual(codedExp, code(text: sentenceComplex))
+	}
+	
 	func testMorze_WordCoddingLangDepending()
 	{
 		let dev = Morzer.deviderLetter

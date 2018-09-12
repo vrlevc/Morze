@@ -149,12 +149,23 @@ func code(text string: String) -> String {
 	var morzeCode = String()
 	var prevChar: Character? = nil
 	for char in string {
+		
+		// skip space after space
+		if char == " " && (prevChar == nil || prevChar == " ") {
+			continue
+		}
+		
+		// define preffix
 		var preffix = ""
-		if prevChar != nil {
+		if prevChar != nil && char != " " {
 			preffix += Morzer.deviderLetter
 		}
-		let charCode = code(symbol: char) ?? "?"
+		
+		// make coded string
+		let charCode = code(symbol: char) ?? String(char)
 		morzeCode += preffix + charCode
+		
+		// update prev char
 		prevChar = char
 	}
 	return morzeCode

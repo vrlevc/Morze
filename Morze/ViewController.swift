@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITextViewDelegate {
 	// MARK: - UITextViewDelegate
 	func textViewDidChange(_ textView: UITextView) {
 		if textView == inputTextView {
-			outputMorzeView.text = inputTextView.text
+			outputMorzeView.text = code(text: inputTextView.text)
 		}
 	}
 	

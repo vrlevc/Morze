@@ -11,6 +11,8 @@ import XCTest
 class MorzeUITests: XCTestCase {
 	
 	var app: XCUIApplication?
+	var input: XCUIElement?
+	var output: XCUIElement?
 	
     override func setUp() {
         super.setUp()
@@ -24,33 +26,76 @@ class MorzeUITests: XCTestCase {
 		app?.launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
+		input = app?.textViews["InputView"]
+		output = app?.textViews["OutputView"]
+
+		XCTAssertNotNil(app)
+		XCTAssertNotNil(input)
+		XCTAssertNotNil(output)
+	}
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample()
+	
+    func testType()
 	{
-		XCTAssertNotNil(app)
-		
-		let input = app?.textViews["InputView"]
-		let output = app?.textViews["OutputView"]
-		XCTAssertNotNil(input)
-		XCTAssertNotNil(output)
-		
-		let testString: String = "Just a new string for UI test in input view"
-		
+		// activate input
 		input?.tap()
-		input?.typeText(testString)
-		
+
+		// tape and check
+		input?.typeText("A")
 		let outText: String? = output?.value as? String
 		XCTAssertNotNil(outText)
-		XCTAssertEqual(testString, outText)
+		XCTAssertEqual(code(text: "A"), outText)
     }
-    
+	
+	func testTyping()
+	{
+		let text = "Complex   sentence  for codding -  with numbers 2 53 34 and symbols !/"
+		
+		// activate input
+		input?.tap()
+		
+		// tape and check
+		input?.typeText(text)
+		let outText: String? = output?.value as? String
+		XCTAssertNotNil(outText)
+		XCTAssertEqual(code(text: text), outText)
+	}
+	
+	func testTypingText()
+	{
+		let text = """
+				   Complex   text  for codding: \n \
+				   - numbers 2 53 34 \n \
+				   - symbols ! / ?
+				   """
+		
+		// activate input
+		input?.tap()
+		
+		// tape and check
+		input?.typeText(text)
+		let outText: String? = output?.value as? String
+		XCTAssertNotNil(outText)
+		XCTAssertEqual(code(text: text), outText)
+
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -157,7 +157,7 @@ func code(text string: String) -> String {
 		
 		// define preffix
 		var preffix = ""
-		if prevChar != nil && char != " " {
+		if prevChar != nil && char != " " && char != "\n" {
 			preffix += Morzer.deviderLetter
 		}
 		

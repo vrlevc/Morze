@@ -77,7 +77,7 @@ class MorzeUITests: XCTestCase {
 		input?.tap()
 		
 		// tape and check
-		input?.typeText(text)
+		input!.typeText(text)
 		let outText: String? = output?.value as? String
 		XCTAssertNotNil(outText)
 		XCTAssertEqual(code(text: text), outText)
@@ -86,45 +86,27 @@ class MorzeUITests: XCTestCase {
 	
 	func testChangeInputLang()
 	{
-		var inputModes:[UITextInputMode] = UITextInputMode.activeInputModes
-		print("The naumber of activeInputModes is \(inputModes.count)")
-		for mode in inputModes {
-			print("Priamry language for mode \(mode.primaryLanguage ?? "NIL")")
+		func testInput(with text: String) {
+			let inputText: String! = input!.value as? String
+			XCTAssertNotNil(inputText)
+			XCTAssertEqual(inputText, text)
 		}
-
-		input?.tap()
 		
-		let mode = UITextInputMode()
-		print("New created input mode language : \(mode.primaryLanguage ?? "NIL")")
+		// activate input
+		input!.tap()
 		
 		let nextKeyboardButton = app?/*@START_MENU_TOKEN@*/.buttons["Next keyboard"]/*[[".keyboards.buttons[\"Next keyboard\"]",".buttons[\"Next keyboard\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-		nextKeyboardButton?.tap()
 		
-		inputModes = UITextInputMode.activeInputModes
-		print("The naumber of activeInputModes is \(inputModes.count)")
-		for mode in inputModes {
-			print("Priamry language for mode \(mode.primaryLanguage ?? "NIL")")
+		for _ in 0..<UITextInputMode.activeInputModes.count {
+			testInput(with:"")
+			input!.typeText(nextKeyboardButton?.value as? String ?? "NIL")
+			nextKeyboardButton?.tap()
 		}
-
 		
-		nextKeyboardButton?.tap()
-		
-		inputModes = UITextInputMode.activeInputModes
-		print("The naumber of activeInputModes is \(inputModes.count)")
-		for mode in inputModes {
-			print("Priamry language for mode \(mode.primaryLanguage ?? "NIL")")
+		for _ in 0..<UITextInputMode.activeInputModes.count {
+			testInput(with:nextKeyboardButton?.value as? String ?? "NIL")
+			nextKeyboardButton?.tap()
 		}
-
-		nextKeyboardButton?.tap()
-		
-		inputModes = UITextInputMode.activeInputModes
-		print("The naumber of activeInputModes is \(inputModes.count)")
-		for mode in inputModes {
-			print("Priamry language for mode \(mode.primaryLanguage ?? "NIL")")
-		}
-
-		
-		
 	}
 }
 

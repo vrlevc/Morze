@@ -11,6 +11,28 @@ import XCTest
 
 class MorzeTests: XCTestCase {
 	
+	func testViewController_NumberOfInputDocuments()
+	{
+		let controller = ViewController()
+		XCTAssertNotNil(controller)
+		
+		controller.initDocs()		// needed for initialization
+		
+		for mode in UITextInputMode.activeInputModes {
+			let language = mode.primaryLanguage!
+			let doc = controller.document(of: language)
+			XCTAssertNotNil(doc)
+			XCTAssertTrue(doc.isEmpty)
+			controller.setDocument(text: language, for: language)
+		}
+		
+		for mode in UITextInputMode.activeInputModes {
+			let doc = controller.document(of: mode.primaryLanguage!)
+			XCTAssertNotNil(doc)
+			XCTAssertEqual(doc, mode.primaryLanguage!)
+		}
+	}
+	
 	func testMorze_SentenceCodding()
 	{
 		let devW = Morzer.deviderWord

@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITextViewDelegate {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		initDocs()
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -31,5 +31,46 @@ class ViewController: UIViewController, UITextViewDelegate {
 		}
 	}
 	
+	// MARK: - Documents
+	var docs: [String: String] = [String: String]()
+	
+	func initDocs() {
+		for mode in UITextInputMode.activeInputModes {
+			docs[mode.primaryLanguage!] = String()
+		}
+	}
+	
+	func setDocument(text: String, for language: String) {
+		docs[language] = text
+	}
+	
+	func document(of language: String) -> String {
+		return docs[language]!
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

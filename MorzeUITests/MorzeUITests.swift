@@ -95,15 +95,15 @@ class MorzeUITests: XCTestCase {
 		// activate input
 		input!.tap()
 		
-		let nextKeyboardButton = app?/*@START_MENU_TOKEN@*/.buttons["Next keyboard"]/*[[".keyboards.buttons[\"Next keyboard\"]",".buttons[\"Next keyboard\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-		
 		for _ in 0..<UITextInputMode.activeInputModes.count {
 			testInput(with:"")
+			let nextKeyboardButton = app?/*@START_MENU_TOKEN@*/.buttons["Next keyboard"]/*[[".keyboards.buttons[\"Next keyboard\"]",".buttons[\"Next keyboard\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
 			input!.typeText(nextKeyboardButton?.value as? String ?? "NIL")
 			nextKeyboardButton?.tap()
 		}
 		
 		for _ in 0..<UITextInputMode.activeInputModes.count {
+			let nextKeyboardButton = app?/*@START_MENU_TOKEN@*/.buttons["Next keyboard"]/*[[".keyboards.buttons[\"Next keyboard\"]",".buttons[\"Next keyboard\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
 			testInput(with:nextKeyboardButton?.value as? String ?? "NIL")
 			nextKeyboardButton?.tap()
 		}
